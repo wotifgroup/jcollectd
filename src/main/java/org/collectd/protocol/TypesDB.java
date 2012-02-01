@@ -87,6 +87,7 @@ public class TypesDB {
         try {
             load(is);
         } finally {
+            System.err.println("load error for types.db");
             is.close();
         }
     }
