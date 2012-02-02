@@ -30,7 +30,7 @@ import org.collectd.api.ValueList;
 
 public class ReceiverTest extends TestCase {
 
-    private UdpReceiver _receiver;
+    protected UdpReceiver _receiver;
     private Thread _receiverThread;
     private static Exception _error;
 
@@ -74,15 +74,6 @@ public class ReceiverTest extends TestCase {
         return socket;
     }
 
-    protected class DispatchLogger implements Dispatcher {
-        public void dispatch(ValueList values) {
-            getLog().info(values.toString());
-        }
-
-        public void dispatch(Notification notification) {
-            getLog().info(notification.toString());
-        }
-    }
     @Override
     public void setUp() throws Exception {
         super.setUp();

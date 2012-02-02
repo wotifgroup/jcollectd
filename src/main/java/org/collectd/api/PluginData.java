@@ -36,6 +36,15 @@ public class PluginData {
         
     }
 
+    public PluginData(long time, String host, String plugin, String pluginInstance, String type, String typeInstance) {
+        _time = time;
+        _host = host;
+        _plugin = plugin;
+        _pluginInstance = pluginInstance;
+        _type = type;
+        _typeInstance = typeInstance;
+    }
+
     public PluginData(PluginData pd) {
         _time = pd._time;
         _host = pd._host;

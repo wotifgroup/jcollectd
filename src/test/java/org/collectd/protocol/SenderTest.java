@@ -33,10 +33,10 @@ public class SenderTest
     extends TestCase
     implements Dispatcher {
 
-    private static long INTERVAL = 10;
-    private static String PLUGIN = "junit";
-    private static String PLUGIN_INSTANCE = "SenderTest";
-    private static final String TYPE = "test";
+    protected long INTERVAL = 10;
+    protected static String PLUGIN = "junit";
+    protected String PLUGIN_INSTANCE = "SenderTest";
+    protected static final String TYPE = "test";
 
     private double dvals[] = { 1.0, 66.77, Double.MAX_VALUE };
     private long lvals[] = { 1, 66, Long.MAX_VALUE, 4 };
