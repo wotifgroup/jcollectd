@@ -105,25 +105,24 @@ public class SenderTest
     }
 
     public void testGauge() throws Exception {
-        return;
-////        ValueList vl = newValueList();
-////        for (double val : dvals) {
-////            vl.addValue(new Double(val));
-////        }
-////        _sender.dispatch(vl);
-////        String host = vl.getHost();
-////        long time = vl.getTime() / 1000;
-////        flush();
-////        assertTrue(_values.size() == 1);
-////        vl = _values.get(0);
-////        assertValueList(vl, host, time);
-////        assertTrue(vl.getValues().size() == dvals.length);
-////        int i=0;
-////        for (Number num : vl.getValues()) {
-////            assertTrue(num.getClass() == Double.class);
-////            assertTrue(num.doubleValue() == dvals[i++]);
-//        }
-//        _values.clear();
+        ValueList vl = newValueList();
+        for (double val : dvals) {
+            vl.addValue(new Double(val));
+        }
+        _sender.dispatch(vl);
+        String host = vl.getHost();
+        long time = vl.getTime() / 1000;
+        flush();
+        assertTrue(_values.size() == 1);
+        vl = _values.get(0);
+        assertValueList(vl, host, time);
+        assertTrue(vl.getValues().size() == dvals.length);
+        int i=0;
+        for (Number num : vl.getValues()) {
+            assertTrue(num.getClass() == Double.class);
+            assertTrue(num.doubleValue() == dvals[i++]);
+        }
+        _values.clear();
     }
 
     public void testCounter() throws Exception {
@@ -146,12 +145,14 @@ public class SenderTest
         }
         _values.clear();
     }
-    
+
+//    todo: testDerive and testAbsolute
     public void dispatch(Notification notification) {
-        
+        getLog().info(notification.toString());
     }
 
     public void dispatch(ValueList vl) {
         _values.add(new ValueList(vl));
+        getLog().info(vl.toString());
     }
 }

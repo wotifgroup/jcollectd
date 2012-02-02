@@ -86,8 +86,9 @@ public class TypesDB {
             getClass().getClassLoader().getResourceAsStream("META-INF/types.db");
         try {
             load(is);
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
         } finally {
-            System.err.println("load error for types.db");
             is.close();
         }
     }
@@ -109,6 +110,9 @@ public class TypesDB {
         String line;
 
         while ((line = reader.readLine()) != null) {
+            try {
+
+
             DataSet ds;
 
             ds = DataSet.parseDataSet (line);
@@ -119,6 +123,12 @@ public class TypesDB {
 
                 this._types.put (type, dsrc);
             }
+
+            }
+            catch (Exception e) {
+                System.err.println("Exception parsing line:" + line);
+            }
+
         }
     } /* void load */
 

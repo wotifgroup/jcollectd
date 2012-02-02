@@ -25,6 +25,8 @@ import java.util.logging.Logger;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.collectd.api.Notification;
+import org.collectd.api.ValueList;
 
 public class ReceiverTest extends TestCase {
 
@@ -72,10 +74,19 @@ public class ReceiverTest extends TestCase {
         return socket;
     }
 
+    protected class DispatchLogger implements Dispatcher {
+        public void dispatch(ValueList values) {
+            getLog().info(values.toString());
+        }
+
+        public void dispatch(Notification notification) {
+            getLog().info(notification.toString());
+        }
+    }
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        _receiver = new UdpReceiver();
+        _receiver = new UdpReceiver(new DispatchLogger());
         DatagramSocket socket = createSocket();
         _receiver.setSocket(socket);
         _receiverThread = new ReceiverThread();

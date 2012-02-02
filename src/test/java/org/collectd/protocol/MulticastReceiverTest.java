@@ -19,9 +19,7 @@
 package org.collectd.protocol;
 
 import java.io.IOException;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
+import java.net.*;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -34,10 +32,21 @@ public class MulticastReceiverTest extends ReceiverTest {
 
     @Override
     protected DatagramSocket createSocket() throws IOException {
-        MulticastSocket socket = new MulticastSocket(Network.DEFAULT_PORT+100);
+        MulticastSocket socket = new MulticastSocket(Network.DEFAULT_PORT);
         String laddr = Network.DEFAULT_V4_ADDR;
         getReceiver().setListenAddress(laddr);
         socket.joinGroup(InetAddress.getByName(laddr));
         return socket;
     }
+
+    public void testListen() throws Exception {
+        DatagramSocket socket = getReceiver().getSocket();
+        assertTrue(socket.isBound());
+        getLog().info("Bound to LocalPort=" + socket.getLocalPort() +
+                ", LocalAddress=" +
+                socket.getLocalAddress().getHostAddress());
+        Thread.sleep(4000);
+    }
+
+
 }

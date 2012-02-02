@@ -26,6 +26,9 @@ import java.util.logging.Logger;
 
 /**
  * Constants from collectd/src/network.h and jcd.* property configuration.
+ * v5 has 1452 buffer_size, up from 1024
+ * A couple new data source types (DERIVE, ABSOLUTE)
+ * Time is transmitted in high-resolution.
  */
 public class Network {
     public static final int DEFAULT_PORT         = 25826;
@@ -50,8 +53,11 @@ public class Network {
     public static final int TYPE_SIGN_SHA256     = 0x0200;
     public static final int TYPE_ENCR_AES256     = 0x0210;
 
-    public static final int DS_TYPE_COUNTER = 0;
-    public static final int DS_TYPE_GAUGE   = 1;
+    public static final int DS_TYPE_COUNTER  = 0;
+    public static final int DS_TYPE_GAUGE    = 1;
+    public static final int DS_TYPE_DERIVE   = 2;
+    public static final int DS_TYPE_ABSOLUTE = 3;
+
 
     static final int UINT8_LEN  = 1;
     static final int UINT16_LEN = UINT8_LEN * 2;
